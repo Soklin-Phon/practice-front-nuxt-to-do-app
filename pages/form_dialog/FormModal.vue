@@ -3,7 +3,7 @@
    there's no need to handle outside click to close the dialog -->
   <v-dialog v-model="show" width="500px" persistent>
       <v-card class="py-4">
-        <v-card-title>
+        <!-- <v-card-title>
           <span class="text-h5">Purchase amount</span>
         </v-card-title>
         <v-card-text>
@@ -37,7 +37,7 @@
                 @click="makePurchase">
               Save
             </v-btn>
-        </v-card-actions>
+        </v-card-actions> -->
       </v-card>
   </v-dialog>
 </template>
@@ -80,10 +80,12 @@ export default {
     // you can close the dialog from the child component
     // and avoid the mutation prop warning
     show: {
-        get() {
+      get() {
+        console.log("login...");
           return this.value
         },
-        set(value) {
+      set(value) {
+          console.log("log...")
           var me = this
           me.$emit('input', value)
         }

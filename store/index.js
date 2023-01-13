@@ -41,6 +41,7 @@ const state = () => ({
 
 const getters = {
     getUser(state) {
+        console.log("get state...", state);
         return state.user
     },
     isLoggedIn(state) {
@@ -52,9 +53,14 @@ const getters = {
     }
 }
 
+ import task from "./modules/task";
+
 export default {
     state,
     actions,
     mutations,
     getters,
+    modules: {
+        task
+    }
 }

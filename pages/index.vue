@@ -62,7 +62,9 @@ export default {
 
   methods: {
     login() {
+      console.log(this.$refs);
       let formValidation = this.$refs.form.validate();
+      console.log("formValidation", formValidation);
 
       if (formValidation) {
         this.$fire.auth
