@@ -11,7 +11,7 @@ export default {
     );
 
     if (this.$fire.auth.currentUser) {
-      this.$router.replace("/profile");
+      this.$router.replace("/to-do");
     } else {
       this.$router.replace("/");
     }

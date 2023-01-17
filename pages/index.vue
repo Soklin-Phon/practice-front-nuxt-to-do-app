@@ -79,7 +79,7 @@ export default {
                 authUser,
               })
               .then(() => {
-                this.$router.replace("/profile");
+                this.$router.replace("/to-do");
               })
               .catch((error) => {
                 console.log("User State error", error);

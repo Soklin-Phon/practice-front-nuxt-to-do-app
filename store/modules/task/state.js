@@ -1,5 +1,6 @@
 export default {
     tasks: [],
     task: null,
-    is_loading: false
+    is_loading: false,
+    done: false
  }

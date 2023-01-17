@@ -1,10 +1,8 @@
 <template>
-  <!-- @click:outside="close", if dialog's "persistent" prop isn't used,
-   there's no need to handle outside click to close the dialog -->
   <v-dialog v-model="show" width="500px" persistent>
       <v-card class="py-4">
-        <!-- <v-card-title>
-          <span class="text-h5">Purchase amount</span>
+        <v-card-title>
+          <span class="text-h5">Update your task</span>
         </v-card-title>
         <v-card-text>
           <v-container>
@@ -12,11 +10,8 @@
               <v-row>
                 <v-col cols="12">
                   <v-text-field
-                      type="number"
-                      label="Amount"
-                      value="10.00"
-                      v-model="amount"
-                      prefix="$"
+                      type="text"
+                      v-model="title"
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -34,10 +29,10 @@
               <v-btn
                 color="blue darken-1"
                 text
-                @click="makePurchase">
+                @click="editTask">
               Save
             </v-btn>
-        </v-card-actions> -->
+        </v-card-actions>
       </v-card>
   </v-dialog>
 </template>
@@ -45,6 +40,8 @@
 <script>
 
 // import {makePurchase} from '../../../service/purchase.service'
+
+import { title } from 'process';
 
 export default {
   
@@ -61,7 +58,7 @@ export default {
     // Instead of trying to access the prop value on the data block
     // Set up a watcher for this prop, and do the value assignment there
     // selectPackage: this.propPackage,
-    amount: '',
+    title: '',
     id: '',
     result: false
   }),  
@@ -69,9 +66,9 @@ export default {
     propPackage(val) {
       // Be sure to validate default values
       // this.fetchData()
-      console.log("log...");
       if(val !== '') {
-        this.id = val
+        this.id = val.id;
+        this.title = val.title;
       }
     }
   },
@@ -81,30 +78,22 @@ export default {
     // and avoid the mutation prop warning
     show: {
       get() {
-        console.log("login...");
+        console.log("get value...", this.value);
           return this.value
         },
       set(value) {
           console.log("log...")
-          var me = this
+          let me = this
           me.$emit('input', value)
         }
     }
   },
   methods: {
-    async makePurchase(){
-                let data = {
-                    amount: this.amount
-                }
-                // const result = await makePurchase(data, this.id);
-                const result = true;
-
-                if(result){
-                  this.show = false
-                  this.$emit('resResult', result)   
-                }
-            
-            },
+    async editTask() {
+      
+      this.$store.dispatch('task/editTask', {id: this.id,title: this.title})
+      this.show = false
+      },
     close() {
       // It's okay to use $emit and set a @close event 
       // if you need to pass data to parent component
